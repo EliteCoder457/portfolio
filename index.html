@@ -5,404 +5,364 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- ============================================================
-       EDIT: Change the title to your name
+       EDIT: Browser tab title
        ============================================================ -->
-  <title>Chirag's Portfolio Site</title>
+  <title>yourhandle — What You Do</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
-    /* ── Theme variables ── */
+    /* ─── Theme tokens ─── */
     :root {
-      --bg:      #ffffff;
-      --fg:      #111111;
-      --muted:   #888888;
-      --border:  #e4e4e4;
-      --tag-bg:  #f2f2f2;
-      --tag-fg:  #444444;
-      --link:    #111111;
-      --link-ul: #bbbbbb;
+      --bg:        #fafaf8;
+      --fg:        #1a1a1a;
+      --muted:     #6b6b6b;
+      --border:    #e8e6e0;
+      --btn-bg:    #eeecea;
+      --btn-fg:    #1a1a1a;
+      --btn-hover: #e2e0d8;
     }
     [data-theme="dark"] {
-      --bg:      #0f0f0f;
-      --fg:      #e8e8e8;
-      --muted:   #666666;
-      --border:  #272727;
-      --tag-bg:  #1e1e1e;
-      --tag-fg:  #aaaaaa;
-      --link:    #e8e8e8;
-      --link-ul: #444444;
+      --bg:        #111110;
+      --fg:        #e6e4dc;
+      --muted:     #888580;
+      --border:    #252320;
+      --btn-bg:    #222120;
+      --btn-fg:    #d4d0c8;
+      --btn-hover: #2c2b28;
     }
 
-    /* ── Reset & base ── */
+    /* ─── Reset ─── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { font-size: 20px; scroll-behavior: smooth; }
-
+    html { font-size: 15px; }
     body {
       background: var(--bg);
       color: var(--fg);
-      font-family: 'Geist', 'Geist Mono', monospace, sans-serif;
+      font-family: 'DM Sans', sans-serif;
       font-weight: 300;
-      line-height: 1.7;
+      line-height: 1.75;
       transition: background 0.2s, color 0.2s;
     }
 
-    /* ── Layout ── */
-    .container {
-      max-width: 560px;
+    /* ─── Page container ─── */
+    .page {
+      max-width: 620px;
       margin: 0 auto;
-      padding: 3.5rem 1.5rem 6rem;
+      padding: 3rem 1.5rem 5.5rem;
+      animation: fadeUp 0.38s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(7px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── Header ── */
-    header {
+    /* ─── Top bar ─── */
+    .topbar {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 2.8rem;
+      justify-content: flex-end;
+      margin-bottom: 3rem;
     }
-
-    .header-left h1 {
-      font-size: 1rem;
-      font-weight: 400;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.35rem;
-    }
-
-    .header-meta {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      color: var(--muted);
-      font-size: 0.82rem;
-      flex-wrap: wrap;
-    }
-
-    .header-meta .sep { color: var(--border); }
-
-    .header-meta a {
-      color: var(--muted);
-      text-decoration: none;
-    }
-    .header-meta a:hover { color: var(--fg); }
-
-    /* ── Tags ── */
-    .tags {
-      display: flex;
-      gap: 0.3rem;
-      flex-wrap: wrap;
-      margin-top: 0.9rem;
-    }
-
-    .tag {
-      background: var(--tag-bg);
-      color: var(--tag-fg);
-      font-size: 0.72rem;
-      padding: 0.18rem 0.5rem;
-      border-radius: 3px;
-      font-family: 'Geist Mono', monospace;
-      letter-spacing: 0.01em;
-    }
-
-    /* ── Theme toggle ── */
     .theme-btn {
       background: none;
       border: none;
       cursor: pointer;
       color: var(--muted);
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       font-family: inherit;
       padding: 0;
-      letter-spacing: 0.02em;
       transition: color 0.15s;
-      flex-shrink: 0;
-      margin-top: 0.1rem;
     }
     .theme-btn:hover { color: var(--fg); }
 
-    /* ── Divider ── */
-    hr {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 2rem 0;
+    /* ─── Profile photo ─── */
+    .profile-photo {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 1.1rem;
+      border: 2px solid var(--border);
     }
-
-    /* ── Sections ── */
-    section { margin-bottom: 2.4rem; }
-
-    section h2 {
-      font-size: 0.78rem;
-      font-weight: 400;
+    /* Initials fallback — shown when no <img> is used */
+    .profile-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--btn-bg);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Newsreader', serif;
+      font-style: italic;
+      font-size: 1.45rem;
       color: var(--muted);
-      letter-spacing: 0.04em;
-      text-transform: lowercase;
       margin-bottom: 1.1rem;
     }
 
-    /* ── About ── */
-    .about-text {
+    /* ─── Name + icons row ─── */
+    .name-row {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.9rem;
+    }
+    .name-row h1 {
+      font-size: 1.22rem;
+      font-weight: 400;
+      font-family: 'Newsreader', serif;
+      letter-spacing: -0.015em;
+    }
+    .social-icons { display: flex; gap: 0.4rem; }
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 27px;
+      height: 27px;
+      border-radius: 6px;
+      background: var(--btn-bg);
+      color: var(--fg);
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .social-icons a:hover { background: var(--btn-hover); }
+    .social-icons svg { width: 13px; height: 13px; fill: currentColor; }
+
+    /* ─── Bio paragraphs ─── */
+    .bio p {
       font-size: 0.9rem;
       color: var(--fg);
-      line-height: 1.75;
-    }
-
-    /* ── Project entries ── */
-    .entry { margin-bottom: 1.6rem; }
-    .entry:last-child { margin-bottom: 0; }
-
-    .entry-tags {
-      display: flex;
-      gap: 0.3rem;
+      line-height: 1.8;
       margin-bottom: 0.4rem;
-      flex-wrap: wrap;
     }
+    .bio p:last-child { margin-bottom: 0; }
 
-    .entry a {
-      display: block;
-      color: var(--link);
-      text-decoration: underline;
-      text-decoration-color: var(--link-ul);
-      text-underline-offset: 3px;
-      font-size: 0.88rem;
+    /* ─── Section header ─── */
+    .section-title {
+      font-family: 'Newsreader', serif;
+      font-size: 0.98rem;
       font-weight: 400;
-      margin-bottom: 0.25rem;
-      transition: text-decoration-color 0.15s;
-    }
-    .entry a:hover { text-decoration-color: var(--fg); }
-
-    .entry p {
-      font-size: 0.82rem;
-      color: var(--muted);
-      line-height: 1.65;
+      margin: 2.4rem 0 1.3rem;
     }
 
-    /* ── Footer ── */
-    footer {
-      margin-top: 3rem;
-      font-size: 0.78rem;
-      color: var(--muted);
+    /* ─── Project entries ─── */
+    .project {
+      padding-bottom: 1.4rem;
+      margin-bottom: 1.4rem;
+      border-bottom: 1px solid var(--border);
     }
-    footer a {
+    .project:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .project-name {
+      font-family: 'Newsreader', serif;
+      font-style: italic;
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 0.3rem;
+    }
+    .project-desc {
+      font-size: 0.86rem;
       color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0.7rem;
+    }
+    .project-links { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .link-btn {
+      display: inline-block;
+      background: var(--btn-bg);
+      color: var(--btn-fg);
+      text-decoration: none;
+      font-size: 0.76rem;
+      padding: 0.22rem 0.62rem;
+      border-radius: 5px;
+      transition: background 0.15s;
+    }
+    .link-btn:hover { background: var(--btn-hover); }
+
+    /* ─── Blog list ─── */
+    .blog-intro {
+      font-size: 0.88rem;
+      margin-bottom: 0.8rem;
+      color: var(--fg);
+    }
+    .blog-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .blog-list li a {
+      color: var(--fg);
+      font-size: 0.87rem;
       text-decoration: underline;
       text-decoration-color: var(--border);
       text-underline-offset: 3px;
+      transition: text-decoration-color 0.15s;
     }
-    footer a:hover { color: var(--fg); }
+    .blog-list li a:hover { text-decoration-color: var(--fg); }
 
-    /* ── Fade-in animation ── */
-    .container { animation: fadeUp 0.4s ease both; }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
+    /* ─── Footer ─── */
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
     }
+    .footer-links {
+      display: flex;
+      gap: 1.1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.8rem;
+    }
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--fg); }
+    .copyright { font-size: 0.78rem; color: var(--muted); }
   </style>
 </head>
 <body>
-<div class="container">
+<div class="page">
+
+  <!-- Theme toggle -->
+  <div class="topbar">
+    <button class="theme-btn" id="themeToggle">Toggle theme</button>
+  </div>
 
   <!-- ============================================================
-       HEADER — Edit name, location, tagline, and skill tags
+       PHOTO
+       Option A (photo): replace profile-avatar div below with:
+         <img src="photo.jpg" alt="Your Name" class="profile-photo" />
+       Put photo.jpg in the same folder as index.html.
+
+       Option B (initials, default): edit "YN" to your initials.
        ============================================================ -->
-  <header>
-    <div class="header-left">
-      <h1>Chirag's Portfolio</h1>
-
-      <div class="header-meta">
-        <!-- Edit location / status / social links below -->
-        <span>IN</span>
-        <span class="sep">·</span>
-        <span>trying stuff :p</span>
-        <!-- Add more links like Twitter/X, GitHub, etc.
-        <span class="sep">·</span>
-        <a href="https://twitter.com/yourhandle" target="_blank">twitter</a>
-        -->
-      </div>
-
-      <!-- Edit your skill/interest tags -->
-      <div class="tags">
-        <span class="tag">cybersec</span>
-        <span class="tag">assembly</span>
-        <span class="tag">low level programming</span>
-        <span class="tag">ai agents</span>
-      </div>
-    </div>
-
-    <!-- Theme toggle button -->
-    <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">light</button>
-  </header>
-
-  <hr />
+  <div class="profile-avatar">YN</div>
 
   <!-- ============================================================
-       ABOUT — Edit your bio
+       NAME & SOCIAL ICONS — edit name and href links
        ============================================================ -->
-  <section id="about">
-    <h2>about</h2>
-    <p class="about-text">
-      18. First year undergrad. i am learning to code and debug. that's it.
-    </p>
-  </section>
+  <div class="name-row">
+    <h1>Your Name</h1>
+
+    <div class="social-icons">
+      <!-- X / Twitter -->
+      <a href="https://x.com/yourhandle" title="X" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <!-- GitHub -->
+      <a href="https://github.com/yourusername" title="GitHub" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      <!-- Discord -->
+      <a href="https://discord.com/users/yourhandle" title="Discord" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+      </a>
+    </div>
+  </div>
 
   <!-- ============================================================
-       PROJECTS — Add/remove/edit project entries
-       Each entry has: tags, a link, and a description
+       BIO — Edit your two paragraphs
        ============================================================ -->
-  <section id="projects">
-    <h2>projects</h2>
-
-    <div class="entry">
-      <div class="entry-tags">
-        <span class="tag">automl</span>
-      </div>
-      <a href="https://github.com/youruser/your-repo" target="_blank">
-        Project One — short catchy subtitle
-      </a>
-      <p>one-line description of what it does and why it matters.</p>
-    </div>
-
-    <div class="entry">
-      <div class="entry-tags">
-        <span class="tag">agents</span>
-      </div>
-      <a href="https://github.com/youruser/your-repo-2" target="_blank">
-        Project Two — autonomous something
-      </a>
-      <p>plans queries, searches the web, synthesizes reports using whatever stack.</p>
-    </div>
-
-    <div class="entry">
-      <div class="entry-tags">
-        <span class="tag">cv</span>
-        <span class="tag">yolo</span>
-      </div>
-      <a href="https://github.com/youruser/your-repo-3" target="_blank">
-        Project Three — real-time whatever detection
-      </a>
-      <p>detects things with severity-based alerts via some model.</p>
-    </div>
-
-  </section>
+  <div class="bio">
+    <p>I love building, breaking and working with [your field]. My main interests are in [area 1] and [area 2].</p>
+    <p>[Role] @ [Company]. Previously @ [Company]. [Award] Grantee '25.</p>
+  </div>
 
   <!-- ============================================================
-       PAPER-INSPIRED BUILDS — Projects you built after reading papers
+       PROJECTS — Duplicate a .project block for each project
        ============================================================ -->
-  <section id="paper-inspired">
-    <h2>paper-inspired builds</h2>
+  <p class="section-title">Projects.</p>
 
-    <div class="entry">
-      <div class="entry-tags">
-        <span class="tag">cv</span>
-        <span class="tag">resnet</span>
+  <div class="projects">
+
+    <div class="project">
+      <p class="project-name">Project One</p>
+      <p class="project-desc">A short one or two sentence description of what this project does and why it matters.</p>
+      <div class="project-links">
+        <a href="https://github.com/youruser/project-one" class="link-btn" target="_blank" rel="noopener">Github</a>
+        <a href="https://yourproject.dev" class="link-btn" target="_blank" rel="noopener">Live</a>
       </div>
-      <a href="https://github.com/youruser/your-repo" target="_blank">
-        ResNet18 transfer learning on CIFAR-10
-      </a>
-      <p>fine-tuned resnet18 on cifar-10 using imagenet weights after reading the resnet paper.</p>
     </div>
 
-    <div class="entry">
-      <div class="entry-tags">
-        <span class="tag">cv</span>
-        <span class="tag">yolo</span>
+    <div class="project">
+      <p class="project-name">Project Two</p>
+      <p class="project-desc">Sandboxes / tooling / library for something specific and useful.</p>
+      <div class="project-links">
+        <a href="https://github.com/youruser/project-two" class="link-btn" target="_blank" rel="noopener">Github</a>
       </div>
-      <a href="https://github.com/youruser/your-repo" target="_blank">
-        Another paper-inspired project
-      </a>
-      <p>applied a model to a problem after working through the original paper.</p>
     </div>
 
-  </section>
+    <div class="project">
+      <p class="project-name">Project Three</p>
+      <p class="project-desc">A hobby project built for fun and to deeply understand a concept.</p>
+      <div class="project-links">
+        <a href="https://github.com/youruser/project-three" class="link-btn" target="_blank" rel="noopener">Github</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <p class="project-name">Project Four</p>
+      <p class="project-desc">Extremely fast / lightweight tool for doing something useful.</p>
+      <div class="project-links">
+        <a href="https://github.com/youruser/project-four" class="link-btn" target="_blank" rel="noopener">Github</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <p class="project-name">Project Five</p>
+      <p class="project-desc">A compiler / interpreter / allocator / OS for learning purposes.</p>
+      <div class="project-links">
+        <a href="https://github.com/youruser/project-five" class="link-btn" target="_blank" rel="noopener">Github</a>
+      </div>
+    </div>
+
+  </div>
 
   <!-- ============================================================
-       PAPER IMPLEMENTATIONS — From-scratch implementations
+       WRITING / BLOG — Edit post titles and links
        ============================================================ -->
-  <section id="implementations">
-    <h2>paper implementations</h2>
+  <p class="section-title">Writing.</p>
 
-    <div class="entry">
-      <div class="entry-tags">
-        <span class="tag">cv</span>
-        <span class="tag">cnn</span>
-      </div>
-      <a href="https://github.com/youruser/alexnet" target="_blank">
-        AlexNet — Krizhevsky et al., 2012
-      </a>
-      <p>from-scratch pytorch implementation of the architecture that started the deep learning era.</p>
-    </div>
+  <p class="blog-intro">These are my favorite blogs that I've written:</p>
 
-    <div class="entry">
-      <div class="entry-tags">
-        <span class="tag">cv</span>
-        <span class="tag">resnet</span>
-      </div>
-      <a href="https://github.com/youruser/resnet" target="_blank">
-        ResNet — He et al., 2015
-      </a>
-      <p>implemented residual connections from scratch; trained on standard benchmarks.</p>
-    </div>
-
-    <div class="entry">
-      <div class="entry-tags">
-        <span class="tag">cv</span>
-        <span class="tag">detection</span>
-      </div>
-      <a href="https://github.com/youruser/yolov1" target="_blank">
-        YOLOv1 — Redmon et al., 2015
-      </a>
-      <p>full from-scratch implementation of single-shot object detection in pytorch.</p>
-    </div>
-
-  </section>
+  <ul class="blog-list">
+    <li><a href="https://yourblog.github.io/post-one" target="_blank" rel="noopener">Title of your first blog post or thread</a></li>
+    <li><a href="https://yourblog.github.io/post-two" target="_blank" rel="noopener">Title of your second blog post</a></li>
+    <li><a href="https://yourblog.github.io/post-three" target="_blank" rel="noopener">Title of your third blog post</a></li>
+    <li><a href="https://yourblog.github.io/post-four" target="_blank" rel="noopener">Title of your fourth blog post</a></li>
+  </ul>
 
   <!-- ============================================================
-       WRITING — Blog posts, threads, articles
-       ============================================================ -->
-  <section id="writing">
-    <h2>writing</h2>
-
-    <div class="entry">
-      <div class="entry-tags">
-        <span class="tag">agents</span>
-      </div>
-      <a href="https://x.com/yourhandle/status/123456" target="_blank">
-        title of your article or thread
-      </a>
-      <p>one-line summary of what it covers and any notable reception.</p>
-    </div>
-
-  </section>
-
-  <!-- ============================================================
-       FOOTER — Optional. Add socials, email, etc.
+       FOOTER — Edit social links and name
        ============================================================ -->
   <footer>
-    <a href="https://github.com/yourusername" target="_blank">github</a>
-    &nbsp;·&nbsp;
-    <a href="https://x.com/yourhandle" target="_blank">twitter / x</a>
-    &nbsp;·&nbsp;
-    <a href="mailto:you@email.com">email</a>
+    <div class="footer-links">
+      <a href="https://x.com/yourhandle" target="_blank" rel="noopener">X</a>
+      <a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://discord.com/users/yourhandle" target="_blank" rel="noopener">Discord</a>
+      <a href="mailto:you@email.com">Email</a>
+      <a href="https://yourblog.github.io" target="_blank" rel="noopener">Blog</a>
+    </div>
+    <!-- EDIT: Your name -->
+    <p class="copyright">© 2025 Your Name</p>
   </footer>
 
 </div>
 
 <script>
-  // ── Theme toggle ──
-  const btn = document.getElementById('themeToggle');
+  const btn  = document.getElementById('themeToggle');
   const html = document.documentElement;
 
-  // Persist preference
+  // Restore saved preference
   const saved = localStorage.getItem('theme') || 'light';
   html.setAttribute('data-theme', saved);
-  btn.textContent = saved === 'dark' ? 'dark' : 'light';
 
   btn.addEventListener('click', () => {
     const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     html.setAttribute('data-theme', next);
-    btn.textContent = next;
     localStorage.setItem('theme', next);
   });
 </script>
