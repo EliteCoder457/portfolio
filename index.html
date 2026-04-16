@@ -117,7 +117,8 @@
       font-family: 'Newsreader', serif;
       letter-spacing: -0.015em;
     }
-    .social-icons { display: flex; gap: 0.4rem; }
+    .social-icons { display: flex; gap: 0.4rem;
+                   align-items: center;}
     .social-icons a {
       display: flex;
       align-items: center;
@@ -132,6 +133,15 @@
     }
     .social-icons a:hover { background: var(--btn-hover); }
     .social-icons svg { width: 13px; height: 13px; fill: currentColor; }
+    .social-icons::after {
+  content: "";
+  display: inline-block;
+  width: 40px;              /* length of line */
+  height: 1px;              /* thickness */
+  background: var(--border);
+  margin-left: 10px;        /* space from icons */
+  align-self: center;
+}
 
     /* ─── Bio paragraphs ─── */
     .bio p {
