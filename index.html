@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============================================================
+       EDIT: Change the title to your name
+       ============================================================ -->
+  <title>Your Name</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Theme variables ── */
+    :root {
+      --bg:      #ffffff;
+      --fg:      #111111;
+      --muted:   #888888;
+      --border:  #e4e4e4;
+      --tag-bg:  #f2f2f2;
+      --tag-fg:  #444444;
+      --link:    #111111;
+      --link-ul: #bbbbbb;
+    }
+    [data-theme="dark"] {
+      --bg:      #0f0f0f;
+      --fg:      #e8e8e8;
+      --muted:   #666666;
+      --border:  #272727;
+      --tag-bg:  #1e1e1e;
+      --tag-fg:  #aaaaaa;
+      --link:    #e8e8e8;
+      --link-ul: #444444;
+    }
+
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 14px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Geist', 'Geist Mono', monospace, sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 6rem;
+    }
+
+    /* ── Header ── */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 2.8rem;
+    }
+
+    .header-left h1 {
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.35rem;
+    }
+
+    .header-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+      flex-wrap: wrap;
+    }
+
+    .header-meta .sep { color: var(--border); }
+
+    .header-meta a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .header-meta a:hover { color: var(--fg); }
+
+    /* ── Tags ── */
+    .tags {
+      display: flex;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+      margin-top: 0.9rem;
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-fg);
+      font-size: 0.72rem;
+      padding: 0.18rem 0.5rem;
+      border-radius: 3px;
+      font-family: 'Geist Mono', monospace;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── Theme toggle ── */
+    .theme-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-family: inherit;
+      padding: 0;
+      letter-spacing: 0.02em;
+      transition: color 0.15s;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .theme-btn:hover { color: var(--fg); }
+
+    /* ── Divider ── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    /* ── Sections ── */
+    section { margin-bottom: 2.4rem; }
+
+    section h2 {
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: lowercase;
+      margin-bottom: 1.1rem;
+    }
+
+    /* ── About ── */
+    .about-text {
+      font-size: 0.9rem;
+      color: var(--fg);
+      line-height: 1.75;
+    }
+
+    /* ── Project entries ── */
+    .entry { margin-bottom: 1.6rem; }
+    .entry:last-child { margin-bottom: 0; }
+
+    .entry-tags {
+      display: flex;
+      gap: 0.3rem;
+      margin-bottom: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .entry a {
+      display: block;
+      color: var(--link);
+      text-decoration: underline;
+      text-decoration-color: var(--link-ul);
+      text-underline-offset: 3px;
+      font-size: 0.88rem;
+      font-weight: 400;
+      margin-bottom: 0.25rem;
+      transition: text-decoration-color 0.15s;
+    }
+    .entry a:hover { text-decoration-color: var(--fg); }
+
+    .entry p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 3rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    footer a {
+      color: var(--muted);
+      text-decoration: underline;
+      text-decoration-color: var(--border);
+      text-underline-offset: 3px;
+    }
+    footer a:hover { color: var(--fg); }
+
+    /* ── Fade-in animation ── */
+    .container { animation: fadeUp 0.4s ease both; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ============================================================
+       HEADER — Edit name, location, tagline, and skill tags
+       ============================================================ -->
+  <header>
+    <div class="header-left">
+      <h1>Your Name</h1>
+
+      <div class="header-meta">
+        <!-- Edit location / status / social links below -->
+        <span>IN</span>
+        <span class="sep">·</span>
+        <span>trying stuff :p</span>
+        <!-- Add more links like Twitter/X, GitHub, etc.
+        <span class="sep">·</span>
+        <a href="https://twitter.com/yourhandle" target="_blank">twitter</a>
+        -->
+      </div>
+
+      <!-- Edit your skill/interest tags -->
+      <div class="tags">
+        <span class="tag">ml</span>
+        <span class="tag">nlp</span>
+        <span class="tag">cv</span>
+        <span class="tag">agents</span>
+      </div>
+    </div>
+
+    <!-- Theme toggle button -->
+    <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">light</button>
+  </header>
+
+  <hr />
+
+  <!-- ============================================================
+       ABOUT — Edit your bio
+       ============================================================ -->
+  <section id="about">
+    <h2>about</h2>
+    <p class="about-text">
+      19. second year undergrad. i read papers and build things. that's it.
+    </p>
+  </section>
+
+  <!-- ============================================================
+       PROJECTS — Add/remove/edit project entries
+       Each entry has: tags, a link, and a description
+       ============================================================ -->
+  <section id="projects">
+    <h2>projects</h2>
+
+    <div class="entry">
+      <div class="entry-tags">
+        <span class="tag">automl</span>
+      </div>
+      <a href="https://github.com/youruser/your-repo" target="_blank">
+        Project One — short catchy subtitle
+      </a>
+      <p>one-line description of what it does and why it matters.</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-tags">
+        <span class="tag">agents</span>
+      </div>
+      <a href="https://github.com/youruser/your-repo-2" target="_blank">
+        Project Two — autonomous something
+      </a>
+      <p>plans queries, searches the web, synthesizes reports using whatever stack.</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-tags">
+        <span class="tag">cv</span>
+        <span class="tag">yolo</span>
+      </div>
+      <a href="https://github.com/youruser/your-repo-3" target="_blank">
+        Project Three — real-time whatever detection
+      </a>
+      <p>detects things with severity-based alerts via some model.</p>
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       PAPER-INSPIRED BUILDS — Projects you built after reading papers
+       ============================================================ -->
+  <section id="paper-inspired">
+    <h2>paper-inspired builds</h2>
+
+    <div class="entry">
+      <div class="entry-tags">
+        <span class="tag">cv</span>
+        <span class="tag">resnet</span>
+      </div>
+      <a href="https://github.com/youruser/your-repo" target="_blank">
+        ResNet18 transfer learning on CIFAR-10
+      </a>
+      <p>fine-tuned resnet18 on cifar-10 using imagenet weights after reading the resnet paper.</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-tags">
+        <span class="tag">cv</span>
+        <span class="tag">yolo</span>
+      </div>
+      <a href="https://github.com/youruser/your-repo" target="_blank">
+        Another paper-inspired project
+      </a>
+      <p>applied a model to a problem after working through the original paper.</p>
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       PAPER IMPLEMENTATIONS — From-scratch implementations
+       ============================================================ -->
+  <section id="implementations">
+    <h2>paper implementations</h2>
+
+    <div class="entry">
+      <div class="entry-tags">
+        <span class="tag">cv</span>
+        <span class="tag">cnn</span>
+      </div>
+      <a href="https://github.com/youruser/alexnet" target="_blank">
+        AlexNet — Krizhevsky et al., 2012
+      </a>
+      <p>from-scratch pytorch implementation of the architecture that started the deep learning era.</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-tags">
+        <span class="tag">cv</span>
+        <span class="tag">resnet</span>
+      </div>
+      <a href="https://github.com/youruser/resnet" target="_blank">
+        ResNet — He et al., 2015
+      </a>
+      <p>implemented residual connections from scratch; trained on standard benchmarks.</p>
+    </div>
+
+    <div class="entry">
+      <div class="entry-tags">
+        <span class="tag">cv</span>
+        <span class="tag">detection</span>
+      </div>
+      <a href="https://github.com/youruser/yolov1" target="_blank">
+        YOLOv1 — Redmon et al., 2015
+      </a>
+      <p>full from-scratch implementation of single-shot object detection in pytorch.</p>
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       WRITING — Blog posts, threads, articles
+       ============================================================ -->
+  <section id="writing">
+    <h2>writing</h2>
+
+    <div class="entry">
+      <div class="entry-tags">
+        <span class="tag">agents</span>
+      </div>
+      <a href="https://x.com/yourhandle/status/123456" target="_blank">
+        title of your article or thread
+      </a>
+      <p>one-line summary of what it covers and any notable reception.</p>
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       FOOTER — Optional. Add socials, email, etc.
+       ============================================================ -->
+  <footer>
+    <a href="https://github.com/yourusername" target="_blank">github</a>
+    &nbsp;·&nbsp;
+    <a href="https://x.com/yourhandle" target="_blank">twitter / x</a>
+    &nbsp;·&nbsp;
+    <a href="mailto:you@email.com">email</a>
+  </footer>
+
+</div>
+
+<script>
+  // ── Theme toggle ──
+  const btn = document.getElementById('themeToggle');
+  const html = document.documentElement;
+
+  // Persist preference
+  const saved = localStorage.getItem('theme') || 'light';
+  html.setAttribute('data-theme', saved);
+  btn.textContent = saved === 'dark' ? 'dark' : 'light';
+
+  btn.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    btn.textContent = next;
+    localStorage.setItem('theme', next);
+  });
+</script>
+</body>
+</html>
