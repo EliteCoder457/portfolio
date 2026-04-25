@@ -19,7 +19,67 @@ family=DM+Sans:wght@300;400;500&
 family=Playwrite+NO:wght@100..400
 &display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
   <style>
+    html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+}
+
+.floating-nav {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(20, 20, 20, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+
+.nav-item,
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 999px;
+  color: #bbb;
+  text-decoration: none;
+  background: transparent;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.nav-item:hover,
+.theme-toggle:hover,
+.nav-item.active {
+  background: #2d2d2d;
+  color: #fff;
+}
+
+.nav-item span {
+  font-size: 16px;
+}
+
+/* Section spacing so you can test scrolling */
+section {
+  min-height: 100vh;
+  padding: 100px 24px 24px;
+}
     /* ─── Theme tokens ─── */
     :root {
       --bg:        #fafaf8;
@@ -252,6 +312,19 @@ family=Playwrite+NO:wght@100..400
   </style>
 </head>
 <body>
+  <nav class="floating-nav">
+  <a href="#about" class="nav-item active">
+    <span>🏠</span> About
+  </a>
+  <a href="#projects" class="nav-item">
+    <span>📁</span> Projects
+  </a>
+  <a href="#blogs" class="nav-item">
+    <span>📚</span> Blogs
+  </a>
+
+
+</nav>
 <div class="page">
 
   <!-- Theme toggle -->
@@ -295,8 +368,8 @@ family=Playwrite+NO:wght@100..400
        ============================================================ -->
 
   
-  <div class="section-title">
-    <h3><i>About</i></h3>
+  <div class="section-title" id="about me">
+    <h3><i>About Me</i></h3>
     <p>I like learning to hack {ethically 😏} and work in cybersecurity. My main interests are in finding web vulnerabilities and contributing to the Cybersec community.</p>
   
   </div>
@@ -304,7 +377,7 @@ family=Playwrite+NO:wght@100..400
   <!-- ============================================================
        PROJECTS — Duplicate a .project block for each project
        ============================================================ -->
-  <div class="section-title">
+  <div class="section-title" id="projects">
     <h3><i>Projects</i></h3>
 
   <div class="projects">
@@ -323,7 +396,7 @@ family=Playwrite+NO:wght@100..400
   <!-- ============================================================
        WRITING / BLOG — Edit post titles and links
        ============================================================ -->
-  <div class="section-title">
+  <div class="section-title" id="blogs">
     <h3><i>Blogs</i></h3>
 
   <p class="blog-intro">These are the blogs that I've written:</p>
@@ -364,6 +437,21 @@ family=Playwrite+NO:wght@100..400
     const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     html.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
+  });
+</script>
+<script>
+  const btn = document.getElementById('themeToggle');
+  const html = document.documentElement;
+
+  const saved = localStorage.getItem('theme') || 'light';
+  html.setAttribute('data-theme', saved);
+  btn.textContent = saved === 'dark' ? '🌙' : '☀️';
+
+  btn.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    btn.textContent = next === 'dark' ? '🌙' : '☀️';
   });
 </script>
 </body>
